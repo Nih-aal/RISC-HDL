@@ -1,0 +1,5 @@
+iverilog -o ./sim/sim_4adder ./testbench/_4bit_tb.v ./modules/adder_subtracter.v
+
+vvp ./sim/sim_4adder 
+
+gtkwave GTK/adder4bit.vcd 

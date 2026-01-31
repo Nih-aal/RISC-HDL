@@ -1,44 +1,75 @@
-`timescale 1ms/1ps
+`timescale 1ns/1ps
 
 module testbench;
 
     reg [63:0] a,b;
-    reg cin;
+    reg mode;
 
     wire [63:0] s;
     wire cout;
 
-    adder_64bit uut (.a(a), .b(b), .cin(cin), .s(s), .cout(cout));
+    add_sub_64bit uut (.a(a), .b(b), .s(s), .cout(cout), .mode(mode));
 
     initial begin
     
         $dumpfile("GTK/adder64bit.vcd");
         $dumpvars(0, testbench);
 
-        cin = 0;
+        //gpt generated cases - 
 
-        // small + small
+        // --------------------
+        // ADDITION TESTS
+        // --------------------
+
+        mode = 0;
+
+        // 1) small + small
         a = 64'd2; 
-        b = 64'd3; 
+        b = 64'd3;
         #10;
 
-        // medium + medium
-        a = 64'd100; 
-        b = 64'd200; 
+        // 2) medium + medium
+        a = 64'd100;
+        b = 64'd200;
         #10;
 
-        // large + large (no overflow)
-        a = 64'd1073741824;     // 2^30
-        b = 64'd1073741824;     // 2^30
+        // 3) large + large (no overflow)
+        a = 64'd1073741824;   // 2^30
+        b = 64'd1073741824;   // 2^30
         #10;
 
-        // edge case (max positive, no overflow)
+        // 4) edge (max positive - 1 + 1)
         a = 64'sh7FFFFFFFFFFFFFFE;
         b = 64'd1;
         #10;
 
-        // signed overflow (positive + positive)
+        // 5) signed overflow (positive + positive)
         a = 64'sh7FFFFFFFFFFFFFFF;
+        b = 64'd1;
+        #10;
+
+        // --------------------
+        // SUBTRACTION TESTS
+        // --------------------
+        mode = 1;
+
+        // 6) 7 - 5 = 2
+        a = 64'd7;
+        b = 64'd5;
+        #10;
+
+        // 7) 5 - 7 = -2
+        a = 64'd5;
+        b = 64'd7;
+        #10;
+
+        // 8) (-3) - (-5) = 2
+        a = -64'sd3;
+        b = -64'sd5;
+        #10;
+
+        // 9) edge: min negative - 1 (overflow)
+        a = 64'sh8000000000000000;
         b = 64'd1;
         #10;
 
