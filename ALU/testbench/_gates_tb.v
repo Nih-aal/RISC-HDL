@@ -4,78 +4,39 @@ module testbench;
 
     reg [63:0] a,b;
 
-    wire [63:0] c;
+    wire [63:0] cxor;
+    wire [63:0] cor;
+    wire [63:0] cand;
 
-    xor_64bit uut (.a(a), .b(b), .c(c)); 
+    xor_64bit uut1 (.a(a), .b(b), .c(cxor)); 
+    or_64bit uut2 (.a(a), .b(b), .c(cor));
+    and_64bit uut3 (.a(a), .b(b), .c(cand));
+
+    integer i;
 
     initial begin
-        
+
         $dumpfile("GTK/gates64bit.vcd");
         $dumpvars(0, testbench);
+        
 
-        // Gpt generated test cases
+        for (i = 0; i < 64; i = i + 1) begin
+            
+            a = 64'b1 << i;
+            b = 64'b0;
+            #5;
 
-        // --------------------
-        // BASIC cases
-        // --------------------
+        end
 
-        // 0 ^ 0 = 0
-        a = 64'd0;
-        b = 64'd0;
-        #10;
-
-        // 1 ^ 0 = 1
-        a = 64'd1;
-        b = 64'd0;
-        #10;
-
-        // 1 ^ 1 = 0
-        a = 64'd1;
-        b = 64'd1;
-        #10;
-
-        // --------------------
-        // Pattern tests
-        // --------------------
-
-        // all 0s ^ all 1s = all 1s
-        a = 64'h0000000000000000;
-        b = 64'hFFFFFFFFFFFFFFFF;
-        #10;
-
-        // all 1s ^ all 1s = 0
-        a = 64'hFFFFFFFFFFFFFFFF;
-        b = 64'hFFFFFFFFFFFFFFFF;
-        #10;
-
-        // alternating bits
-        a = 64'hAAAAAAAAAAAAAAAA; // 1010...
-        b = 64'h5555555555555555; // 0101...
-        #10;
-
-        // --------------------
-        // Random-looking values
-        // --------------------
-
-        a = 64'h123456789ABCDEF0;
-        b = 64'h0F0F0F0F0F0F0F0F;
-        #10;
-
-        a = 64'h8000000000000000;
-        b = 64'h0000000000000001;
-        #10;
-
-        // --------------------
-        // Self XOR (must be zero)
-        // --------------------
-
-        a = 64'hDEAABEEECAAEBEBE;
-        b = 64'hDEAABEEECAAEBEBE;
-        #10;
-
-        $finish;
+        i = 0;
+        for (i = 0; i < 64; i = i + 1) begin
+        
+            a = 64'b1 << i;
+            b = 64'hFFFFFFFFFFFFFFFF;
+            #5;
+        
+        end
 
     end
-
-
+    
 endmodule
