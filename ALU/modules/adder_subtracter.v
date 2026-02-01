@@ -11,7 +11,7 @@ module adder_1bit (
 
 );
 
-    wire P;
+    wire P, beff;
     assign beff = mode ^ b;
     assign P = a ^ beff;
     assign s = (P) ^ cin;
