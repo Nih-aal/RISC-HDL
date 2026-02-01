@@ -6,16 +6,16 @@ module testbench;
     reg mode;
 
     wire [63:0] s;
-    wire cout;
+    wire carry_flag, overflow_flag;
 
-    add_sub_64bit uut (.a(a), .b(b), .s(s), .cout(cout), .mode(mode));
+    add_sub_64bit uut (.a(a), .b(b), .s(s), .mode(mode), .carry_flag(carry_flag), .overflow_flag(overflow_flag));
 
     initial begin
     
         $dumpfile("GTK/adder64bit.vcd");
         $dumpvars(0, testbench);
 
-        //gpt generated cases - 
+        // Gpt generated cases - 
 
         // --------------------
         // ADDITION TESTS

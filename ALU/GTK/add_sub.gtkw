@@ -1,0 +1,28 @@
+[*]
+[*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
+[*] Sun Feb  1 07:01:47 2026
+[*]
+[dumpfile] "/home/nihaal/Documents/Projects/RISC - HDL/ALU/GTK/adder64bit.vcd"
+[dumpfile_mtime] "Sun Feb  1 06:59:31 2026"
+[dumpfile_size] 35186
+[savefile] "/home/nihaal/Documents/Projects/RISC - HDL/ALU/GTK/add_sub.gtkw"
+[timestart] 0
+[size] 1920 1001
+[pos] -101 -101
+*-13.568180 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] testbench.
+[sst_width] 278
+[signals_width] 134
+[sst_expanded] 1
+[sst_vpaned_height] 297
+@28
+testbench.mode
+@420
+testbench.a[63:0]
+testbench.b[63:0]
+testbench.s[63:0]
+testbench.carry_flag
+@421
+testbench.overflow_flag
+[pattern_trace] 1
+[pattern_trace] 0
