@@ -20,13 +20,23 @@ endmodule
 module barrel_shifter_right_logical (
 
     input [63:0] data,
-    input [5:0] shift, 
+    input [63:0] _shift, 
 
     // Reason for masking to only 6 bits - https://www.reddit.com/r/cpp/comments/1ow3g9y/cursed_arithmetic_left_shifts/
 
     output [63:0] out
 
 );
+
+    wire [5:0] shift;
+
+    buf b0 (shift[0], _shift[0]);
+    buf b1 (shift[1], _shift[1]);
+    buf b2 (shift[2], _shift[2]);
+    buf b3 (shift[3], _shift[3]);
+    buf b4 (shift[4], _shift[4]);
+    buf b5 (shift[5], _shift[5]);
+
 
     wire [63:0] layer1;
 
@@ -164,13 +174,22 @@ endmodule
 module barrel_shifter_right_arithmetic (
 
     input [63:0] data,
-    input [5:0] shift, 
+    input [63:0] _shift, 
 
     // Reason for masking to only 6 bits - https://www.reddit.com/r/cpp/comments/1ow3g9y/cursed_arithmetic_left_shifts/
 
     output [63:0] out
 
 );
+
+    wire [5:0] shift;
+
+    buf b0 (shift[0], _shift[0]);
+    buf b1 (shift[1], _shift[1]);
+    buf b2 (shift[2], _shift[2]);
+    buf b3 (shift[3], _shift[3]);
+    buf b4 (shift[4], _shift[4]);
+    buf b5 (shift[5], _shift[5]);
 
     wire [63:0] layer1;
 
