@@ -2,18 +2,6 @@
 
 // Due to provided design constraints the following is being done 
 
-module xor_1bit (
-
-    input a,
-    input b,
-
-    output c
-
-); 
-
-    assign c = a ^ b;
-
-endmodule
 
 module xor_4bit (
 
@@ -24,10 +12,10 @@ module xor_4bit (
 
 );
 
-    xor_1bit instance1 (.a(a[0]), .b(b[0]), .c(c[0]));
-    xor_1bit instance2 (.a(a[1]), .b(b[1]), .c(c[1]));
-    xor_1bit instance3 (.a(a[2]), .b(b[2]), .c(c[2]));
-    xor_1bit instance4 (.a(a[3]), .b(b[3]), .c(c[3]));
+    xor instance1 (c[0], b[0], a[0]);
+    xor instance2 (c[1], b[1], a[1]);
+    xor instance3 (c[2], b[2], a[2]);
+    xor instance4 (c[3], b[3], a[3]);
 
 endmodule
 
@@ -65,19 +53,6 @@ endmodule
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-module or_1bit (
-
-    input a,
-    input b,
-
-    output c
-
-); 
-
-    assign c = a | b;
-
-endmodule
-
 module or_4bit (
 
     input [3:0] a,
@@ -87,10 +62,10 @@ module or_4bit (
 
 );
 
-    or_1bit instance1 (.a(a[0]), .b(b[0]), .c(c[0]));
-    or_1bit instance2 (.a(a[1]), .b(b[1]), .c(c[1]));
-    or_1bit instance3 (.a(a[2]), .b(b[2]), .c(c[2]));
-    or_1bit instance4 (.a(a[3]), .b(b[3]), .c(c[3]));
+    or instance1 (c[0], b[0], a[0]);
+    or instance2 (c[1], b[1], a[1]);
+    or instance3 (c[2], b[2], a[2]);
+    or instance4 (c[3], b[3], a[3]);
 
 endmodule
 
@@ -128,19 +103,6 @@ endmodule
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-module and_1bit (
-
-    input a,
-    input b,
-
-    output c
-
-); 
-
-    assign c = a & b;
-
-endmodule 
-
 module and_4bit (
 
     input [3:0] a,
@@ -150,10 +112,10 @@ module and_4bit (
 
 );
 
-    and_1bit instance1 (.a(a[0]), .b(b[0]), .c(c[0]));
-    and_1bit instance2 (.a(a[1]), .b(b[1]), .c(c[1]));
-    and_1bit instance3 (.a(a[2]), .b(b[2]), .c(c[2]));
-    and_1bit instance4 (.a(a[3]), .b(b[3]), .c(c[3]));
+    and instance1 (c[0], b[0], a[0]);
+    and instance2 (c[1], b[1], a[1]);
+    and instance3 (c[2], b[2], a[2]);
+    and instance4 (c[3], b[3], a[3]);
 
 endmodule
 

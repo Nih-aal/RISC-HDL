@@ -15,10 +15,14 @@ module adder_1bit (
 );
 
     wire P, beff;
-    assign beff = mode ^ b;
-    assign P = a ^ beff;
-    assign s = (P) ^ cin;
-    assign cout = (a & beff) | (cin & P);
+    xor instance1 (beff, mode, b);
+    xor instance2 (P, a, beff);
+    xor instance3 (s, P, cin);
+
+    wire and1, and2;
+    and instance4 (and1, a, beff);
+    and instance5 (and2, cin, P);
+    or instance6 (cout, and1, and2);
 
 endmodule
 
@@ -32,7 +36,6 @@ module adder_4bit (
     output [3:0] s,
     output _cout, // one bit less than cout (for overflow)
     output cout
-
 
 );
 
@@ -92,8 +95,9 @@ module add_sub_64bit (
     adder_16bit instance3 (.a(a[47:32]), .b(b[47:32]), .cin(c[1]), .s(s[47:32]), .cout(c[2]), .mode(mode));
     adder_16bit instance4 (.a(a[63:48]), .b(b[63:48]), .cin(c[2]), .s(s[63:48]), .cout(cout), .mode(mode), ._cout(_cout));
 
-    assign overflow_flag = cout ^ _cout;
-    assign carry_flag = cout;
+
+    xor instance5 (overflow_flag, cout, _cout);
+    buf instance6 (carry_flag, cout);
 
 endmodule
 
