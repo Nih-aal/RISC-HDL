@@ -37,6 +37,8 @@ module testbench;
         
         end
 
+        $finish;
+        
     end
     
 endmodule

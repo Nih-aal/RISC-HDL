@@ -73,6 +73,8 @@ module testbench;
         b = 64'd1;
         #10;
 
+        $finish;
+        
     end
 
 endmodule
