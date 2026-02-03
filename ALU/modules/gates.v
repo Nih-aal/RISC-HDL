@@ -152,6 +152,65 @@ module and_64bit (
 endmodule
 
 
+//////////////////////////////////////////////////////
+
+// Hardware for zero flag 
+
+module or_4bit_itself (
+
+    input [3:0] a,
+
+    output out
+
+);
+    wire intermediate1, intermediate2;
+
+    or o0 (intermediate1, a[0], a[1]);
+    or o1 (intermediate2, a[2], a[3]);
+    or o2 (out, intermediate1, intermediate2);
+
+endmodule
+
+module or_16bit_itself (
+
+    input [15:0] a,
+
+    output out
+
+);
+
+    wire [3:0] intermediate;
+
+    or_4bit_itself instance1 (.out(intermediate[0]),.a(a[3:0]));
+    or_4bit_itself instance2 (.out(intermediate[1]),.a(a[7:4]));
+    or_4bit_itself instance3 (.out(intermediate[2]),.a(a[11:8]));
+    or_4bit_itself instance4 (.out(intermediate[3]),.a(a[15:12]));
+    
+    or_4bit_itself instance5 (.out(out), .a(intermediate));
+    
+
+endmodule
+
+module or_64bit_itself (
+
+    input [63:0] a,
+
+    output out
+
+);
+
+    wire [3:0] intermediate;
+
+    or_16bit_itself instance1 (.out(intermediate[0]), .a(a[15:0]));
+    or_16bit_itself instance2 (.out(intermediate[1]), .a(a[31:16]));
+    or_16bit_itself instance3 (.out(intermediate[2]), .a(a[47:32]));
+    or_16bit_itself instance4 (.out(intermediate[3]), .a(a[63:48]));
+    
+    or_4bit_itself instance5 (.out(out), .a(intermediate));
+    
+
+endmodule
+
 
 
 
